@@ -12,7 +12,10 @@ import reactor.netty.http.brave.ReactorNettyHttpTracing
 class ClientConfiguration {
     @Bean
     fun httpClientCustomizer(reactorNettyHttpTracing: ReactorNettyHttpTracing) = ReactorNettyHttpClientMapper {
-       reactorNettyHttpTracing.decorateHttpClient(it)
+//       reactorNettyHttpTracing.decorateHttpClient(it)
+        it.metrics(true) { uriTagValue: String ->
+            uriTagValue //Not sure what to do here ?
+        }
     }
 
     @Bean
