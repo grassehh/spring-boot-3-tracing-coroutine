@@ -7,6 +7,7 @@ This project is an attempt of using [Micrometer Tracing](https://github.com/micr
 - [Kotlin coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 - [Reactor Netty](https://projectreactor.io/docs/netty/release/reference/index.html)
 - [Zipkin Brave](https://github.com/openzipkin/brave)
+- [Zalando Logbook](https://github.com/zalando/logbook)
 
 This might also be useful for those migrating *Spring Boot 2 & Spring Sleuth* to *Spring Boot 3* which has breaking changes about tracing.
 

@@ -21,7 +21,7 @@ class SampleController(private val webClient: WebClient, private val tracer: Tra
     suspend fun test() {
         tracer.createBaggageInScope("myBaggageController", "myBaggageControllerValue")
         logger.debug { "Log from inside the controller. This should contain the baggage called myBaggageController" }
-        webClient.get().uri { it.scheme("https").host("github.com").path("reactor/reactor-netty/issues/2850").build() }
+        webClient.get().uri { it.scheme("https").host("google.com").build() }
             .awaitExchange { }
     }
 }
