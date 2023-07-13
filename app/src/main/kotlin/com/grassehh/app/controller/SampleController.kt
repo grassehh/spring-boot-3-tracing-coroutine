@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.awaitExchange
+import java.util.*
 
 @RestController
 @RequestMapping("/test")
@@ -19,7 +20,7 @@ class SampleController(private val webClient: WebClient, private val tracer: Tra
     @ResponseStatus(OK)
     @PreAuthorize("hasRole('USER')")
     suspend fun test() {
-        tracer.createBaggageInScope("myBaggageController", "myBaggageControllerValue")
+        tracer.createBaggageInScope("myBaggageController", UUID.randomUUID().toString())
         logger.debug { "Log from inside the controller. This should contain the baggage called myBaggageController" }
         webClient.get().uri { it.scheme("https").host("google.com").build() }
             .awaitExchange { }
