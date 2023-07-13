@@ -5,9 +5,9 @@ management:
         fields:
           - myBaggageFilter
           - myBaggageController
-      remote-fields:
-        - myBaggageFilter
-        - myBaggageController
+#      remote-fields:
+#        - myBaggageFilter
+#        - myBaggageController
     sampling:
       probability: 1.0
     propagation:
