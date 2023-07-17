@@ -10,7 +10,6 @@ import reactor.netty.Connection
 
 @Configuration
 class ServerConfiguration {
-
     @Bean
     fun logbookNettyServerCustomizer(logbook: Logbook, contextSnapshotFactory: ContextSnapshotFactory) =
         NettyServerCustomizer { server ->
@@ -21,6 +20,8 @@ class ServerConfiguration {
                         contextSnapshotFactory
                     )
                 )
+            }.metrics(true) { uriTagValue: String ->
+                uriTagValue
             }
         }
 }
