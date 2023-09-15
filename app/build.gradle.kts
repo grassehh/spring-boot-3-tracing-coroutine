@@ -20,19 +20,19 @@ repositories {
 
 dependencies {
     implementation(platform(BOM_COORDINATES))
-    implementation(platform("org.zalando:logbook-bom:3.1.0"))
+    implementation(platform("org.zalando:logbook-bom:3.4.0"))
     implementation(platform("io.micrometer:micrometer-tracing-bom:1.1.5"))
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-security")
     runtimeOnly("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.7.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("io.micrometer:micrometer-tracing-bridge-brave:1.1.5") {
+    implementation("io.micrometer:micrometer-tracing-bridge-brave") {
         exclude(group = "io.zipkin.reporter2", module = "zipkin-reporter-brave")
     }
     implementation("io.github.microutils:kotlin-logging:3.0.5")
-    implementation("org.zalando:logbook-spring-boot-starter:3.1.0")
-    implementation("org.zalando:logbook-spring-boot-webflux-autoconfigure:3.1.0")
+    implementation("org.zalando:logbook-spring-boot-starter")
+    implementation("org.zalando:logbook-spring-boot-webflux-autoconfigure")
     compileOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
