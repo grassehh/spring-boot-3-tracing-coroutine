@@ -1,9 +1,11 @@
 package com.grassehh.app.configuration
 
+import io.micrometer.context.ContextRegistry
 import io.micrometer.context.ContextSnapshotFactory
 import io.micrometer.observation.ObservationRegistry
 import io.micrometer.observation.contextpropagation.ObservationThreadLocalAccessor
 import io.micrometer.tracing.Tracer
+import io.micrometer.tracing.contextpropagation.ObservationAwareSpanThreadLocalAccessor
 import io.netty.channel.ChannelDuplexHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelPromise
@@ -21,7 +23,7 @@ class TracingConfiguration(private val observationRegistry: ObservationRegistry,
     @PostConstruct
     fun postConstruct() {
         Hooks.enableAutomaticContextPropagation()
-//        ContextRegistry.getInstance().registerThreadLocalAccessor(ObservationAwareSpanThreadLocalAccessor(tracer));
+        ContextRegistry.getInstance().registerThreadLocalAccessor(ObservationAwareSpanThreadLocalAccessor(tracer));
         ObservationThreadLocalAccessor.getInstance().observationRegistry = observationRegistry
         Metrics.observationRegistry(observationRegistry)
     }

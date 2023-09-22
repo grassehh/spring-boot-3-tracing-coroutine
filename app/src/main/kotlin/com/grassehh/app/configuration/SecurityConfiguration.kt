@@ -1,6 +1,7 @@
 package com.grassehh.app.configuration
 
 import com.grassehh.app.filter.AppWebFilter
+import io.micrometer.observation.ObservationRegistry
 import io.micrometer.tracing.Tracer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -28,7 +29,7 @@ class SecurityConfiguration {
     )
 
     @Bean
-    fun springSecurityFilterChain(http: ServerHttpSecurity, tracer: Tracer) =
+    fun springSecurityFilterChain(http: ServerHttpSecurity, tracer: Tracer, observationRegistry: ObservationRegistry) =
         http
             .authorizeExchange { exchanges: AuthorizeExchangeSpec ->
                 exchanges
@@ -36,6 +37,7 @@ class SecurityConfiguration {
             }
             .httpBasic(withDefaults())
             .formLogin(withDefaults())
+//            .addFilterBefore(CoroutineWebFilter(observationRegistry), FIRST)
             .addFilterBefore(AppWebFilter(tracer), HTTP_BASIC)
             .build()
 }
