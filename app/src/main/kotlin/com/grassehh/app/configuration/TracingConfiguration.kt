@@ -2,6 +2,7 @@ package com.grassehh.app.configuration
 
 import io.micrometer.context.ContextRegistry
 import io.micrometer.context.ContextSnapshotFactory
+import io.micrometer.core.instrument.kotlin.asContextElement
 import io.micrometer.observation.ObservationRegistry
 import io.micrometer.observation.contextpropagation.ObservationThreadLocalAccessor
 import io.micrometer.tracing.Tracer
@@ -10,13 +11,25 @@ import io.netty.channel.ChannelDuplexHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelPromise
 import jakarta.annotation.PostConstruct
+import kotlinx.coroutines.withContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.server.CoWebFilter
+import org.springframework.web.server.CoWebFilterChain
+import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Hooks
 import reactor.netty.Metrics
 
 @Configuration
 class TracingConfiguration(private val observationRegistry: ObservationRegistry, private val tracer: Tracer) {
+    @Bean
+    fun coroutineWebFilter() = object : CoWebFilter() {
+        override suspend fun filter(exchange: ServerWebExchange, chain: CoWebFilterChain) =
+            withContext(observationRegistry.asContextElement()) {
+                chain.filter(exchange)
+            }
+    }
+
     @Bean
     fun contextSnapshotFactory() = ContextSnapshotFactory.builder().build()
 
