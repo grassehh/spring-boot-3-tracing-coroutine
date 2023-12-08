@@ -37,7 +37,6 @@ class SecurityConfiguration {
             }
             .httpBasic(withDefaults())
             .formLogin(withDefaults())
-//            .addFilterBefore(CoroutineWebFilter(observationRegistry), FIRST)
             .addFilterBefore(AppWebFilter(tracer), HTTP_BASIC)
             .build()
 }

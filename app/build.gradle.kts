@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     implementation(platform(BOM_COORDINATES))
-    implementation(platform("org.zalando:logbook-bom:3.4.0"))
+    implementation(platform("org.zalando:logbook-bom:3.7.0"))
     implementation(platform("io.micrometer:micrometer-tracing-bom:1.2.0"))
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-security")
