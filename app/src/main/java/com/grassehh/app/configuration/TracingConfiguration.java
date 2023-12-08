@@ -29,6 +29,7 @@ public class TracingConfiguration {
     @PostConstruct
     public void postConstruct() {
         Hooks.enableAutomaticContextPropagation();
+//        ContextRegistry.getInstance().registerThreadLocalAccessor(ObservationAwareSpanThreadLocalAccessor(tracer));
         ObservationThreadLocalAccessor.getInstance().setObservationRegistry(observationRegistry);
         Metrics.observationRegistry(observationRegistry);
     }
