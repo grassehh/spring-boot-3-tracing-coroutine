@@ -21,6 +21,8 @@ class ServerConfiguration {
                         contextSnapshotFactory
                     )
                 )
+            }.metrics(true) { uriTagValue: String ->
+                uriTagValue
             }
         }
 }
