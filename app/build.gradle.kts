@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
 
 plugins {
-    id("org.springframework.boot") version "3.2.0"
+    id("org.springframework.boot") version "3.2.1-SNAPSHOT"
     kotlin("jvm") version "1.9.10"
     kotlin("plugin.spring") version "1.9.10"
 }
@@ -16,6 +16,9 @@ java {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://repo.spring.io/snapshot")
+    }
 }
 
 dependencies {
