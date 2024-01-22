@@ -22,3 +22,7 @@ logging:
 logbook:
   strategy: status-at-least
   minimum-status: 200
+
+spring:
+  reactor:
+    context-propagation: auto

@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.server.CoWebFilter
 import org.springframework.web.server.CoWebFilterChain
 import org.springframework.web.server.ServerWebExchange
-import reactor.core.publisher.Hooks
 import reactor.netty.Metrics
 
 @Configuration
@@ -35,7 +34,6 @@ class TracingConfiguration(private val observationRegistry: ObservationRegistry,
 
     @PostConstruct
     fun postConstruct() {
-        Hooks.enableAutomaticContextPropagation()
         ContextRegistry.getInstance().registerThreadLocalAccessor(ObservationAwareSpanThreadLocalAccessor(tracer));
         ObservationThreadLocalAccessor.getInstance().observationRegistry = observationRegistry
         Metrics.observationRegistry(observationRegistry)
