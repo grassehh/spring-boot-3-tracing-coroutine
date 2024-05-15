@@ -24,7 +24,7 @@ Run `./gradlew bootRun` then call the local server depending on the behavior you
 ## Simple
 This will test the following behavior:
 1) Write a log in the controller
-2) Make a **webClient** call
+2) Make a `webClient` call
 
 `curl --location 'http://localhost:8080/simple' --header 'Authorization: Basic dXNlcjp1c2Vy'`
 
@@ -32,7 +32,7 @@ This will test the following behavior:
 This will test the following behavior:
 1) Simulate some delay inside the coroutine so that kotlin suspends the function then resume it
 2) Write a log in the controller
-3) Make a **webClient** call
+3) Make a `webClient` call
 
 `curl --location 'http://localhost:8080/suspend' --header 'Authorization: Basic dXNlcjp1c2Vy'`
 
@@ -40,6 +40,12 @@ This will test the following behavior:
 This will test the following behavior:
 1) Start a new coroutine
 2) Write a log in the controller
-3) Make a **webClient** call
+3) Make a `webClient` call
+
+## AOP
+This will test the following behavior:
+1) Start a new coroutine
+2) Write a log in the controller
+3) Make a `webClient` call through a proxied service
 
 `curl --location 'http://localhost:8080/coroutine' --header 'Authorization: Basic dXNlcjp1c2Vy'`

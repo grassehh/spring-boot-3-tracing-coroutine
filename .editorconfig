@@ -1,0 +1,12 @@
+[*]
+max_line_length = 160
+indent_style = space
+end_of_line = lf
+charset = utf-8
+tab_width = 4
+insert_final_newline = false
+
+[{*.kt,*.kts}]
+indent_size = 4
+ij_kotlin_allow_trailing_comma = false
+ij_kotlin_name_count_to_use_star_import = 10

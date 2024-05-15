@@ -1,5 +1,6 @@
 package com.grassehh.app.controller
 
+import com.grassehh.app.service.ProxiedService
 import io.micrometer.core.instrument.kotlin.asContextElement
 import io.micrometer.observation.ObservationRegistry
 import io.micrometer.tracing.Tracer
@@ -21,7 +22,8 @@ import java.util.*
 class SampleController(
     private val webClient: WebClient,
     private val tracer: Tracer,
-    private val observationRegistry: ObservationRegistry
+    private val observationRegistry: ObservationRegistry,
+    private val proxiedService: ProxiedService
 ) {
     companion object {
         private val logger = logger {}
@@ -61,6 +63,16 @@ class SampleController(
             webClient.get()
                 .uri("https://www.google.fr")
                 .awaitExchange { }
+        }
+    }
+
+    @GetMapping("aop")
+    @ResponseStatus(OK)
+    @PreAuthorize("hasRole('USER')")
+    suspend fun aop() {
+        tracer.createBaggageInScope("myBaggageController", UUID.randomUUID().toString())
+        CoroutineScope(SupervisorJob()).launch(observationRegistry.asContextElement()) {
+            proxiedService.doSomethingSuspend()
         }
     }
 }
