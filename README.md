@@ -42,10 +42,12 @@ This will test the following behavior:
 2) Write a log in the controller
 3) Make a `webClient` call
 
+`curl --location 'http://localhost:8080/coroutine --header 'Authorization: Basic dXNlcjp1c2Vy'`
+
 ## AOP
 This will test the following behavior:
 1) Start a new coroutine
 2) Write a log in the controller
 3) Make a `webClient` call through a proxied service
 
-`curl --location 'http://localhost:8080/coroutine' --header 'Authorization: Basic dXNlcjp1c2Vy'`
+`curl --location 'http://localhost:8080/aop' --header 'Authorization: Basic dXNlcjp1c2Vy'`
