@@ -71,7 +71,9 @@ class SampleController(
     @PreAuthorize("hasRole('USER')")
     suspend fun aop() {
         tracer.createBaggageInScope("myBaggageController", UUID.randomUUID().toString())
+        logger.debug { "CONTROLLER LOG BEFORE COROUTINE" }
         CoroutineScope(SupervisorJob()).launch(observationRegistry.asContextElement()) {
+            logger.debug { "CONTROLLER LOG INSIDE COROUTINE" }
             proxiedService.doSomethingSuspend()
         }
     }
